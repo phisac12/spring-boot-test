@@ -1,0 +1,11 @@
+br\com\zaix\routes\Routes.class
+br\com\zaix\exception\ResourceNotFoundException.class
+br\com\zaix\models\Person.class
+br\com\zaix\exception\ExceptionResponse.class
+br\com\zaix\mapper\ObjectMapper.class
+br\com\zaix\repository\PersonRepository.class
+br\com\zaix\controllers\PersonController.class
+br\com\zaix\exception\handler\CustomEntityResponseHandler.class
+br\com\zaix\data\dto\PersonDTO.class
+br\com\zaix\services\PersonService.class
+br\com\zaix\Startup.class
