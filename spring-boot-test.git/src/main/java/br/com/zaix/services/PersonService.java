@@ -2,6 +2,7 @@ package br.com.zaix.services;
 
 import br.com.zaix.controllers.PersonController;
 import br.com.zaix.data.dto.PersonDTO;
+import br.com.zaix.exception.RequiredObjectIsNullException;
 import br.com.zaix.exception.ResourceNotFoundException;
 import static br.com.zaix.mapper.ObjectMapper.parseListObject;
 import static br.com.zaix.mapper.ObjectMapper.parseObject;
@@ -30,8 +31,9 @@ public class PersonService {
 
     public List<PersonDTO> getAllPersons() {
         logger.info("Found all persons");
-        return 
-        parseListObject(personRepository.findAll(), PersonDTO.class);
+        var persons = parseListObject(personRepository.findAll(), PersonDTO.class);
+        persons.forEach(this::addHateoasLinks);
+        return persons;
     }
 
     public PersonDTO getPersonById(Long id) {
@@ -41,19 +43,24 @@ public class PersonService {
         .findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No records found to this ID"));
         var dto = parseObject(entity, PersonDTO.class);
-        addHateoasLinks(id, dto);
+        addHateoasLinks(dto);
         return dto;
     }
 
 
     public PersonDTO createPerson(PersonDTO person) {
-        logger.info("Created an person");
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
         var entity = parseObject(person, Person.class);
-        return parseObject(personRepository.save(entity), PersonDTO.class);
+        var dto = parseObject(personRepository.save(entity), PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public PersonDTO updatePerson(PersonDTO person) {
-        logger.info("Update an person =>");
+
+        if(person == null) throw new RequiredObjectIsNullException();
 
         Person entity = personRepository
         .findById(person.getId())
@@ -63,7 +70,9 @@ public class PersonService {
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
-        return parseObject(personRepository.save(entity), PersonDTO.class);
+        var dto = parseObject(personRepository.save(entity), PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public void deletePerson(Long id) {
@@ -74,12 +83,12 @@ public class PersonService {
         personRepository.delete(entity);
     }
 
-    private void addHateoasLinks(Long id, PersonDTO dto) {
-        dto.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel().withType("GET"));
+    private void addHateoasLinks(PersonDTO dto) {
+        dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).getAllPersons()).withRel("getAllPersons").withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).createPerson(dto)).withRel("createPerson").withType("POST"));
         dto.add(linkTo(methodOn(PersonController.class).updatePerson(dto)).withRel("updatePerson").withType("PUT"));
-        dto.add(linkTo(methodOn(PersonController.class).deletePerson(id)).withRel("delete").withType("DELETE"));
+        dto.add(linkTo(methodOn(PersonController.class).deletePerson(dto.getId())).withRel("delete").withType("DELETE"));
     }
 
 }
