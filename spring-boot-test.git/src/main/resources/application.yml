@@ -20,4 +20,9 @@ spring:
 logging:
     level:
         # root: WARN
-        br.com.zaix: DEBUG
+        # br.com.zaix: DEBUG
+        root: INFO
+spring-doc:
+    paths-to-mach: /api/spring-boot-test/v1/**
+    swagger-ui:
+        use-root-path: true

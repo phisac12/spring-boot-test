@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +27,6 @@ import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
-
 class PersonServiceTest {
 
     MockPerson input;
@@ -51,7 +49,8 @@ class PersonServiceTest {
         Person person = input.mockEntity(1);
         person.setId(1L);   
         when(repository.findById(1L)).thenReturn(Optional.of(person));
-        var result = service.getPersonById(1L);        
+        var result = service.getPersonById(1L);   
+             
 
         assertNotNull(person);
         assertNotNull(result.getId());

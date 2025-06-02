@@ -15,9 +15,6 @@ import jakarta.persistence.Table;
 @Table(name = "person")
 public class Person implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

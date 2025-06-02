@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PersonService {
@@ -37,7 +36,7 @@ public class PersonService {
     }
 
     public PersonDTO getPersonById(Long id) {
-        logger.info("Find Person by id: " + id);
+        logger.info("Find An Person by id: " + id);
 
         var entity = personRepository
         .findById(id)
