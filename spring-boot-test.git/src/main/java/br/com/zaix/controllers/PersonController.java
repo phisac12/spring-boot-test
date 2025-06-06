@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 @RestController
 @RequestMapping(Routes.BASE_API)
 @Tag(name = "People", description = "Endpoints for managing people")
