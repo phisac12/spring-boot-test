@@ -1,4 +1,4 @@
-package br.com.zaix.services;
+package br.com.zaix.unit_tests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import br.com.zaix.data.dto.PersonDTO;
 import br.com.zaix.exception.RequiredObjectIsNullException;
 import br.com.zaix.models.Person;
 import br.com.zaix.repository.PersonRepository;
+import br.com.zaix.services.PersonService;
 import br.com.zaix.unit_tests.mapper.mocks.MockPerson;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="335b2693-2d48-4172-9047-c18640ba9e6d" name="Changes" comment="" />
+    <list default="true" id="335b2693-2d48-4172-9047-c18640ba9e6d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-test.git/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/src/test/java/br/com/zaix/StartupTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/src/test/java/br/com/zaix/services/BookServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/src/test/java/br/com/zaix/services/PersonServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-test.git/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/target/test-classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-test.git/target/test-classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/target/test-classes/br/com/zaix/StartupTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/target/test-classes/br/com/zaix/services/BookServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-test.git/target/test-classes/br/com/zaix/services/PersonServiceTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,6 +91,9 @@
       <workItem from="1746665523874" duration="558000" />
       <workItem from="1746668639308" duration="896000" />
       <workItem from="1746669555466" duration="129000" />
+      <workItem from="1748996579073" duration="711000" />
+      <workItem from="1748997651345" duration="36000" />
+      <workItem from="1749004552771" duration="19000" />
     </task>
     <servers />
   </component>

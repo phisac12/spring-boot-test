@@ -1,4 +1,4 @@
-package br.com.zaix.services;
+package br.com.zaix.unit_tests.services;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -12,6 +12,7 @@ import br.com.zaix.data.dto.BookDTO;
 import br.com.zaix.exception.RequiredObjectIsNullException;
 import br.com.zaix.models.Book;
 import br.com.zaix.repository.BookRepository;
+import br.com.zaix.services.BookService;
 import br.com.zaix.unit_tests.mapper.mocks.MockBook;
 
 import static org.junit.jupiter.api.Assertions.*;
