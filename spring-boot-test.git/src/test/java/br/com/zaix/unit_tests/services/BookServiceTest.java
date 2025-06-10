@@ -9,8 +9,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.zaix.data.dto.BookDTO;
+import br.com.zaix.data.dto.PersonDTO;
 import br.com.zaix.exception.RequiredObjectIsNullException;
 import br.com.zaix.models.Book;
+import br.com.zaix.models.Person;
 import br.com.zaix.repository.BookRepository;
 import br.com.zaix.services.BookService;
 import br.com.zaix.unit_tests.mapper.mocks.MockBook;
@@ -99,12 +101,13 @@ class BookServiceTest {
 
     @Test
     void createBook() {
+        
         Book book = input.mockEntity(1);
         Book persisted = book;
 
         BookDTO dto = input.mockDTO(1);
 
-        when(repository.save(book)).thenReturn(persisted);
+        when(repository.save(any(Book.class))).thenReturn(persisted);
 
         var result = service.createBook(dto);
         result.setLaunchDate(calendar.getTime());

@@ -3,8 +3,6 @@ package br.com.zaix.integration_tests.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.springframework.hateoas.RepresentationModel;
-
 public class PersonDTO implements Serializable {
 
     private long id;
@@ -13,6 +11,7 @@ public class PersonDTO implements Serializable {
     private String lastName;
     private String address;
     private String gender;
+    private boolean enabled;
 
 
     public PersonDTO() {}
@@ -65,15 +64,23 @@ public class PersonDTO implements Serializable {
         this.sensitiveData = sensitiveData;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PersonDTO personDTO = (PersonDTO) o;
-        return id == personDTO.id && Objects.equals(sensitiveData, personDTO.sensitiveData) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(address, personDTO.address) && Objects.equals(gender, personDTO.gender);
+        return id == personDTO.id && Objects.equals(sensitiveData, personDTO.sensitiveData) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(address, personDTO.address) && Objects.equals(gender, personDTO.gender) && Objects.equals(enabled, personDTO.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sensitiveData, firstName, lastName, address, gender);
+        return Objects.hash(id, sensitiveData, firstName, lastName, address, gender, enabled);
     }
 }

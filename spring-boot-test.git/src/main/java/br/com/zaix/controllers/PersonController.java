@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 
 @RestController
@@ -49,6 +50,16 @@ public class PersonController implements PersonControllerDocs {
         var person = personService.getPersonById(id);
         return person;
     }
+
+    @Override
+    @PatchMapping(value = "/person/{id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE
+    })
+    public PersonDTO disablePerson(@PathVariable("id") Long id) {
+        return personService.disablePerson(id);
+   }
 
     @PostMapping(
             value = "person",

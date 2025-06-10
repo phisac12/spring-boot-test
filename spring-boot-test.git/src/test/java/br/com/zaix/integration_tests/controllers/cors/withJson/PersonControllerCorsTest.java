@@ -1,6 +1,5 @@
-package br.com.zaix.integration_tests.controllers.withjson;
+package br.com.zaix.integration_tests.controllers.cors.withJson;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PersonControllerTest extends AbstractIntegrationTest {
+class PersonControllerCorsTest extends AbstractIntegrationTest {
 
 
     private static RequestSpecification specification;
@@ -85,6 +84,7 @@ class PersonControllerTest extends AbstractIntegrationTest {
         assertEquals("Stalman", createdPerson.getLastName());
         assertEquals( "New York City - New York - USA", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
 
     }
 
@@ -118,32 +118,6 @@ class PersonControllerTest extends AbstractIntegrationTest {
     @Test
     @Order(3)
     void findById() throws JsonProcessingException {
-
-        specification = new RequestSpecBuilder()
-        .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SEMERU)
-        .setBasePath("/api/spring-boot-test/v1/person")
-        .setPort(TestConfigs.SERVER_PORT)
-        .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-        .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-        .build();
-
-        var content = given(specification)
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .pathParam("id", personDTO.getId())
-		.when()
-			.get("{id}")
-		.then()
-			.statusCode(403)
-		.extract()
-			.body()
-				.asString();
-
-        assertEquals("Invalid CORS request", content);
-    }
-
-    @Test
-    @Order(4)
-    void findByIdWithWrongOrigin() throws JsonProcessingException {
 
         specification = new RequestSpecBuilder()
         .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL_HOST)
@@ -180,8 +154,34 @@ class PersonControllerTest extends AbstractIntegrationTest {
         assertEquals("Stalman", createdPerson.getLastName());
         assertEquals( "New York City - New York - USA", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
     }
 
+    @Test
+    @Order(4)
+    void findByIdWithWrongOrigin() throws JsonProcessingException {
+
+        specification = new RequestSpecBuilder()
+        .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SEMERU)
+        .setBasePath("/api/spring-boot-test/v1/person")
+        .setPort(TestConfigs.SERVER_PORT)
+        .addFilter(new RequestLoggingFilter(LogDetail.ALL))
+        .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+        .build();
+
+        var content = given(specification)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .pathParam("id", personDTO.getId())
+		.when()
+			.get("{id}")
+		.then()
+			.statusCode(403)
+		.extract()
+			.body()
+				.asString();
+
+        assertEquals("Invalid CORS request", content);
+    }
 
 
     @Test
@@ -201,5 +201,6 @@ class PersonControllerTest extends AbstractIntegrationTest {
         personDTO.setLastName("Stalman");
         personDTO.setAddress("New York City - New York - USA");
         personDTO.setGender("Male");
+        personDTO.setEnabled(true);
     }
 }

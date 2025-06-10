@@ -13,6 +13,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     private String lastName;
     private String address;
     private String gender;
+    private boolean enabled;
 
 
     public PersonDTO() {}
@@ -57,6 +58,14 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
         this.gender = gender;
     }
 
+     public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getSensitiveData() {
         return sensitiveData;
     }
@@ -69,11 +78,11 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PersonDTO personDTO = (PersonDTO) o;
-        return id == personDTO.id && Objects.equals(sensitiveData, personDTO.sensitiveData) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(address, personDTO.address) && Objects.equals(gender, personDTO.gender);
+        return id == personDTO.id && Objects.equals(sensitiveData, personDTO.sensitiveData) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(address, personDTO.address) && Objects.equals(gender, personDTO.gender) && Objects.equals(enabled, personDTO.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sensitiveData, firstName, lastName, address, gender);
+        return Objects.hash(id, sensitiveData, firstName, lastName, address, gender, enabled);
     }
 }

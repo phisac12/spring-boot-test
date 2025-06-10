@@ -265,16 +265,16 @@ class PersonServiceTest {
         && link.getHref().endsWith("api/spring-boot-test/v1/person/1") 
         && link.getType().equals("DELETE")));
 
-        var personFour = people.get(4);
-
-        assertEquals("Address Test4", personFour.getAddress());
-        assertEquals("First Name Test4", personFour.getFirstName());
-        assertEquals("Last Name Test4", personFour.getLastName());
-        assertEquals("Male", personFour.getGender());
+        assertEquals("Address Test0", personOne.getAddress());
+        assertEquals("First Name Test0", personOne.getFirstName());
+        assertEquals("Last Name Test0", personOne.getLastName());
+        assertEquals("Male", personOne.getGender());
 
         assertNotNull(personOne);
-        assertNotNull(personFour.getId());
-        assertNotNull(personFour.getLinks());
+        assertNotNull(personOne.getId());
+        assertNotNull(personOne.getLinks());
+
+        var personFour = people.get(4);
 
         assertNotNull(personFour.getLinks().stream().anyMatch(link -> link.getRel()
         .value().equals("self") 
@@ -305,7 +305,7 @@ class PersonServiceTest {
         assertEquals("Address Test4", personFour.getAddress());
         assertEquals("First Name Test4", personFour.getFirstName());
         assertEquals("Last Name Test4", personFour.getLastName());
-        assertEquals("Female", personFour.getGender());
+        assertEquals("Male", personFour.getGender());
 
 
         var personSeven = people.get(7);

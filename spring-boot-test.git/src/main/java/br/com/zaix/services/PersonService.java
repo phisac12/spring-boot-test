@@ -8,6 +8,7 @@ import static br.com.zaix.mapper.ObjectMapper.parseListObject;
 import static br.com.zaix.mapper.ObjectMapper.parseObject;
 import br.com.zaix.models.Person;
 import br.com.zaix.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -82,11 +83,25 @@ public class PersonService {
         personRepository.delete(entity);
     }
 
+    @Transactional
+    public PersonDTO disablePerson(Long id) {
+        personRepository
+        .findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("No records found to this ID"));
+
+        personRepository.disablePerson(id);
+        var entity = personRepository.findById(id).get();
+        var dto = parseObject(entity, PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
+    }
+
     private void addHateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).getAllPersons()).withRel("getAllPersons").withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).createPerson(dto)).withRel("createPerson").withType("POST"));
         dto.add(linkTo(methodOn(PersonController.class).updatePerson(dto)).withRel("updatePerson").withType("PUT"));
+        dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("disablePerson").withType("PATCH"));
         dto.add(linkTo(methodOn(PersonController.class).deletePerson(dto.getId())).withRel("delete").withType("DELETE"));
     }
 
